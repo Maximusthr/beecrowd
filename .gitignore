@@ -2,3 +2,4 @@
 .cph/
 output
 .vscode
+*.bin
