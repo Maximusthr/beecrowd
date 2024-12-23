@@ -2,35 +2,45 @@
 
 using namespace std;
 
-bool ordenar(string x, string y){
-    return x.size() < y.size();
+bool ordenacao(pair<string, int> x, pair<string, int> y){
+    if (x.first.size() != y.first.size()) return x.first.size() > y.first.size();
+    return x.second < y.second;
 }
 
 int main(){
-    int x; cin >> x;
+    int qtd; cin >> qtd;
     cin.ignore();
 
-    for (int i = 0; i < x; i++){
-        vector<string> v;
-        vector<string> v2;
+    while(qtd--){
         string aux; getline(cin, aux);
-        string y;
-        for (int j = 0; j < (int)aux.size(); j++){
-            if (aux[j] == ' ' || j == aux.size()-1){
-                if (j == aux.size()-1) y += aux[j];
-                v.push_back(y);
-                v2.push_back(y);
-                y = "";
-            } else {
-                y += aux[j];
+
+        string x;
+        vector<string> vetor;
+        for (int i = 0; i < (int)aux.size(); i++){
+            if (aux[i] != ' ') {
+                x += aux[i];
+                if (i == (int)aux.size()-1) {
+                    vetor.push_back(x);
+                    break;
+                }
+            }
+            else if (aux[i] == ' ') {
+                vetor.push_back(x);
+                x = {};
             }
         }
 
-        sort(v.rbegin(), v.rend(), ordenar);
+        vector<pair<string, int>> valores;
 
-        for (int k = 0; k < (int)v.size(); k++){
-            cout << v[k] << " ";
+        for (int i = 0; i < (int)vetor.size(); i++){
+            valores.push_back({vetor[i], i});
         }
-        cout << "\n";
+        
+        sort(valores.begin(), valores.end(), ordenacao);
+
+        for (int i = 0; i < (int)valores.size(); i++){
+            if (i != (int)valores.size()-1) cout << valores[i].first << " ";
+            else cout << valores[i].first << "\n";
+        }        
     }
 }
