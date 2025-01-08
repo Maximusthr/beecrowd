@@ -14,7 +14,7 @@ int main(){
         getline(cin, z);
         
         int soma_y = 0, soma_z = 0;
-        int pos_y = -1, pos_z = -1; // 150, pois garante que um deles acerte tudo e não ocorra problemas no desempate.
+        int pos_y = -1, pos_z = -1;
         bool igual = true, ok = true;
         
         for (int j = 0; j < (int)x.size(); j++){
