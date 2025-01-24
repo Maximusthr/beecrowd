@@ -3,41 +3,44 @@
 using namespace std;
 
 int main(){
-    //ios_base::sync_with_stdio(0); cin.tie(NULL);
-    int x, y, z; 
-    while (cin >> x >> y >> z){
-        cin.ignore();
-        int pag = 1;
-        string frase; getline(cin, frase);
-
+    ios_base::sync_with_stdio(0); cin.tie(NULL);
+    int n, l, c; 
+    while (cin >> n >> l >> c){
         vector<string> palavras;
-
-        string aux2;
-        for (int i = 0; i < (int)frase.size(); i++){
-            if (frase[i] != ' ' || (i == (int)frase.size()-1)){
-                aux2 += frase[i];
-                if (i == (int)frase.size()-1) palavras.push_back(aux2);
-            } else if (frase[i] == ' ') {
-                palavras.push_back(aux2);
-                aux2 = {};
-            }
+        for (int i = 0; i < n; i++){
+            string aux; cin >> aux;
+            palavras.push_back(aux);
         }
 
-        int aux = 0;
         int linha = 0;
+        int carac = 0;
+        int pag = 0;
         for (int i = 0; i < (int)palavras.size(); i++){
-            aux += (int)palavras[i].size();
-            if (i != (int)palavras.size()-1) aux++; // caractere de espaço
-            if (aux >= z){
-                linha++;
-                aux -= z;
+            if ((int)palavras[i].size() + carac <= c){
+                carac += (int)palavras[i].size();
+                // espaço
+                if (carac + 1 <= c){
+                    carac++;
+                }
+                if (carac == c){
+                    linha++;
+                    carac = 0;
+                }
             }
-            if (linha == y){
-                linha = 0;
-                pag++;
+            else {
+                linha++;
+                carac = 0;
+                i--;
             }
 
-            if (i == (int)palavras.size()-1 && aux != 0 && aux < (int)palavras[i].size()) pag--;
+            if (linha == l){
+                pag++;
+                linha = 0;
+            }
+
+            if (i == (int)palavras.size()-1){
+                if (carac > 0 || linha > 0) pag++;
+            }
         }
 
         cout << pag << "\n";
