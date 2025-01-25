@@ -22,7 +22,6 @@ int main(){
 
         long long caminho = 0;
         int aux = 0, pos = 0;
-        int fim = 0;
         while(1){
             if (pos == (int)positivo.size() || aux == (int)negativo.size()) break;
             if (negativo[aux].first < 0){
@@ -32,7 +31,7 @@ int main(){
                         positivo[pos].first -= abs(negativo[aux].first);
                         negativo[aux].first = 0;
                     }
-                    else { // pegar apenas o numero que sera utilizado
+                    else { 
                         caminho += abs(positivo[pos].first) * abs(positivo[pos].second - negativo[aux].second);
                         negativo[aux].first += positivo[pos].first;
                         positivo[pos].first = 0;
