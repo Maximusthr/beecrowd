@@ -13,6 +13,6 @@ int main(){
             int aux; cin >> aux;
             seq.push_back(aux);
         }
-
+        ////
     }
 }
