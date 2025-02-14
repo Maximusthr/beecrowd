@@ -18,4 +18,9 @@ int main() {
     if (soma > um) cout << "Y";
     else cout << "N";
     cout << "\n";
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> d3990809b2d89886c35f7f0439e9a2981ec7f058
 }
