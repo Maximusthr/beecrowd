@@ -19,21 +19,29 @@ bool isValid(int x, int y){
 
 
 void dfs(int u, int v){
-    vis[u][v] = true;
-    
-    //quando estiver na borda, vale.
-    if (u == 0 || v == 0 || u == n-1 || v == m-1) ponto[u][v] = true;
-    
-    for (int i = 0; i < 4; i++){
-        int x = u + pos_X[i];
-        int y = v + pos_Y[i];
-        if (!isValid(x, y)) continue;
+    stack<pair<int, int>> pilha;
+    pilha.push({u, v});
 
-        if (g[x][y] == '.') {
-            ponto[u][v] = true;
-        }
-        else if (g[x][y] == '#' && !vis[x][y]){
-            dfs(x, y);
+    while(!pilha.empty()){
+        auto [cx, cy] = pilha.top();
+        pilha.pop();
+        vis[cx][cy] = true;
+
+        //quando estiver na borda, vale.
+        if (cx == 0 || cy == 0 || cx == n-1 || cy == m-1) ponto[cx][cy] = true;
+
+        for (int i = 0; i < 4; i++){
+            int x = cx + pos_X[i];
+            int y = cy + pos_Y[i];
+            if (!isValid(x, y)) continue;
+    
+            if (g[x][y] == '.') {
+                ponto[cx][cy] = true;
+            }
+            else if (g[x][y] == '#' && !vis[x][y]){
+                
+                pilha.push({x, y});
+            }
         }
     }
 }
